@@ -6,12 +6,15 @@ import {
   Patch,
   Delete,
   Param,
-  Query
+  Query,
+  // UseGuards
 } from '@nestjs/common';
 import { TodosService } from './todos.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { FilterTodoDto } from './dto/filter-todo.dto';
+// import { AuthGuard } from 'src/auth/guard/auth.guard';
+// import { Public } from 'src/auth/decorator/public.decorator';
 
 @Controller('todo')
 export class TodosController {
@@ -22,7 +25,9 @@ export class TodosController {
     return this.todosService.create(createTodoDto);
   }
 
+  // @UseGuards(AuthGuard)
   @Get()
+  // @Public()
   findAll(@Query() filterTodoDto: FilterTodoDto) {
     return this.todosService.findAll(filterTodoDto);
   }
